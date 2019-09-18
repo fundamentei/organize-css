@@ -1,9 +1,13 @@
 {
   "name": "organize-css",
   "displayName": "Organize CSS",
-  "description": "",
+  "description": "A VS Code extension/plugin that helps organising CSS in JS properties. Totally opinionated.",
   "version": "0.0.1",
   "publisher": "andreyvital",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fundamentei/organize-css"
+  },
   "engines": {
     "vscode": "^1.38.0"
   },
@@ -23,9 +27,8 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
     "test": "jest"
   },
   "devDependencies": {
