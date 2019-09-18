@@ -18,26 +18,61 @@ import hyphenateStyleName from "./hyphenateStyleName";
 
 type TProperties = Array<ObjectMethod | ObjectProperty | SpreadElement>;
 
+function getStyleNameFromObjectProperty(property: ObjectProperty): string | null {
+  if (isIdentifier(property.key)) {
+    return hyphenateStyleName(property.key.name);
+  }
+
+  if (isStringLiteral(property.key)) {
+    return pseudo.indexOf(property.key.value) !== -1 ? property.key.value : hyphenateStyleName(property.key.value);
+  }
+
+  return null;
+}
+
 function getSortedProperties(properties: TProperties): TProperties {
   const rational: TProperties = [];
+  const missing: TProperties = [];
+
+  // those properties will be placed at the end of the object in the order they're declared
   const footer: TProperties = properties.filter(property => {
-    return property.type === "SpreadElement" || property.type === "ObjectMethod";
+    if (property.type === "SpreadElement" || property.type === "ObjectMethod") {
+      return true;
+    }
+
+    if (property.type === "ObjectProperty") {
+      return property.computed;
+    }
+
+    return false;
+  });
+
+  const knownProperties = groups.reduce((a, b) => a.concat(b), []);
+
+  properties.forEach(property => {
+    if (property.type !== "ObjectProperty") {
+      return;
+    }
+
+    const key = getStyleNameFromObjectProperty(property);
+
+    // those properties are the ones we don't know how to sort...so keep them in the `missing` array in the order that
+    // they're declared and they'll will be put back in the end of the object
+    if (key && knownProperties.indexOf(key) === -1) {
+      missing.push(property);
+    }
   });
 
   groups.forEach(cssProperties => {
     cssProperties.forEach(cssProperty => {
       const property = properties.find(property => {
-        if (property.type === "ObjectProperty") {
-          if (isIdentifier(property.key)) {
-            const hyphenated = hyphenateStyleName(property.key.name);
-            return cssProperty === hyphenated;
-          }
+        if (footer.indexOf(property) !== -1) {
+          return false;
+        }
 
-          if (isStringLiteral(property.key)) {
-            if (pseudo.indexOf(property.key.value) !== -1) {
-              return cssProperty === property.key.value;
-            }
-          }
+        if (property.type === "ObjectProperty") {
+          const styleName = getStyleNameFromObjectProperty(property);
+          return styleName === cssProperty;
         }
 
         return false;
@@ -49,7 +84,7 @@ function getSortedProperties(properties: TProperties): TProperties {
     });
   });
 
-  return rational.concat(footer);
+  return rational.concat(missing).concat(footer);
 }
 
 export default async function parseAndSort(objectExpression: string): Promise<string | null> {

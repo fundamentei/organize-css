@@ -10,6 +10,10 @@ export function activate(context: vscode.ExtensionContext) {
     const editor = vscode.window.activeTextEditor;
     const selectionText = editor.document.getText(editor.selection);
 
+    if (!selectionText) {
+      return;
+    }
+
     parseAndSort(selectionText).then(withSortedCSSProperties => {
       if (withSortedCSSProperties) {
         editor.edit(editBuilder => {

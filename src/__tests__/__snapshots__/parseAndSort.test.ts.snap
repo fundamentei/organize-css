@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parseAndSort doesn't touch computed properties 1`] = `
+"{ ...a,
+  [display]: \\"flex\\",
+  ...b,
+  ...c
+}"
+`;
+
+exports[`parseAndSort keeps spread elements in the order that they're declared 1`] = `
+"{
+  display: \\"flex\\",
+  ...a,
+  ...b,
+  ...c
+}"
+`;
+
 exports[`parseAndSort works for the case 1.txt 1`] = `
 "{
   position: \\"absolute\\",
