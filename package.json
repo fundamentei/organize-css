@@ -3,6 +3,7 @@
   "displayName": "Organize CSS",
   "description": "",
   "version": "0.0.1",
+  "publisher": "andreyvital",
   "engines": {
     "vscode": "^1.38.0"
   },
