@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseAndSort works for the case 1.txt 1`] = `
+"{
+  position: \\"absolute\\",
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  zIndex: 1,
+  display: \\"inline-flex\\",
+  alignItems: \\"center\\",
+  justifyContent: \\"center\\",
+  boxSizing: \\"border-box\\",
+  minWidth: 18,
+  maxWidth: 18,
+  minHeight: 18,
+  maxHeight: 18,
+  padding: 2,
+  backgroundColor: disabled ? palette.catskillWhite : palette.white,
+  border: \`solid 1px \${palette.mystic}\`,
+  borderRadius: 2,
+  cursor: \\"pointer\\",
+  pointerEvents: disabled ? \\"none\\" : \\"all\\",
+  \\"&:hover\\": {
+    border: \`solid 1px \${palette.perano}\`
+  },
+  \\"&:focus\\": {
+    border: \`solid 1px \${shades.primary.variants[6]}\`,
+    outline: \\"none\\",
+    boxShadow: \`\${shades.primary.variants[8]} 0px 0px 0px 3px\`
+  }
+}"
+`;
+
+exports[`parseAndSort works for the case 2.txt 1`] = `
+"{
+  position: \\"absolute\\",
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+  zIndex: 1,
+  display: \\"inline-flex\\",
+  alignItems: \\"center\\",
+  justifyContent: \\"center\\",
+  boxSizing: \\"border-box\\",
+  minWidth: 18,
+  maxWidth: 18,
+  minHeight: 18,
+  maxHeight: 18,
+  padding: 2,
+  borderRadius: 2,
+  cursor: \\"pointer\\"
+}"
+`;
+
+exports[`parseAndSort works for the case 3.txt 1`] = `
+"{
+  position: \\"absolute\\",
+  right: 0,
+  ...defaultStyles,
+  ...getCSSStyles(disabled)
+}"
+`;

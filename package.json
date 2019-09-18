@@ -1,0 +1,48 @@
+{
+  "name": "organize-css",
+  "displayName": "Organize CSS",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.organizeCSS"
+  ],
+  "main": "./build/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.organizeCSS",
+        "title": "Organize selected CSS"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.6.0",
+    "@babel/traverse": "^7.6.0",
+    "@types/glob": "^7.1.1",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^10.12.21",
+    "@types/vscode": "^1.38.0",
+    "glob": "^7.1.4",
+    "jest": "^24.9.0",
+    "mocha": "^6.1.4",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "vscode-test": "^1.2.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.6.0"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  right: 0,
+  ...defaultStyles,
+  position: "absolute",
+  ...getCSSStyles(disabled),
+}
